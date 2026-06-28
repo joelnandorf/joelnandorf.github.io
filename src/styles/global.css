@@ -1,37 +1,6 @@
 @import "tailwindcss";
-@import "./theme.css";
-@import "./typography.css";
+@plugin "@tailwindcss/typography";
 
-/* Fontsource imports */
-@import "@fontsource-variable/manrope";
-@import "@fontsource-variable/literata";
-@import "@fontsource/fira-code/400.css";
-@import "@fontsource/fira-code/500.css";
-@import "@fontsource-variable/caveat";
-
-/* Tailwind theme extension */
-@theme {
-  --font-lipi-sans:  "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-lipi-serif: "Literata Variable", ui-serif, Georgia, serif;
-  --font-lipi-mono:  "Fira Code", ui-monospace, Consolas, monospace;
-  --font-lipi-hand:  "Caveat Variable", cursive;
-
-  --color-background:        var(--background);
-  --color-foreground:        var(--foreground);
-  --color-card:              var(--card);
-  --color-card-foreground:   var(--card-foreground);
-  --color-muted:             var(--muted);
-  --color-muted-foreground:  var(--muted-foreground);
-  --color-border:            var(--border);
-  --color-accent:            var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-primary:           var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-selection:         var(--selection);
-  --color-brand:             var(--brand);
-}
-
-/* Base reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -40,99 +9,28 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-lipi-sans);
+  background-color: white;
+  color: #0f172a;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   line-height: 1.6;
 }
 
-::selection {
-  background-color: var(--selection);
+code {
+  font-family: Menlo, Monaco, 'Lucida Console', 'Courier New', monospace;
 }
 
-/* Scroll-driven reading progress (vertical bar, left edge) */
-.reading-progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100vh;
-  background: color-mix(in srgb, var(--brand) 70%, transparent);
-  transform-origin: top;
-  transform: scaleY(0);
-  animation: reading-progress linear;
-  animation-timeline: scroll();
-  z-index: 50;
-}
-
-@keyframes reading-progress {
-  to { transform: scaleY(1); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reading-progress-bar {
-    animation: none;
-    display: none;
-  }
-}
-
-/* Layout utilities */
 .app-layout {
   width: 100%;
   max-width: 44rem;
   margin-inline: auto;
   padding-inline: 1.5rem;
-}
-
-/* Nav underline animation */
-.nav-underline {
-  position: relative;
-  text-decoration: none;
-}
-
-.nav-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--primary);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.2s ease;
-}
-
-.nav-underline:hover::after,
-.nav-underline[aria-current="page"]::after {
-  transform: scaleX(1);
-}
-
-/* Theme toggle */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 9999px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  cursor: pointer;
-  font-size: 0.75rem;
-  color: var(--muted-foreground);
-  transition: border-color 0.15s, color 0.15s;
-}
-
-.theme-toggle:hover {
-  border-color: var(--primary);
-  color: var(--foreground);
 }

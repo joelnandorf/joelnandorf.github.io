@@ -11,30 +11,30 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   title="Shift+Build — bygga på gränsen mellan kod, produkt och design"
   description="Perspektiv från en tech lead i en produkttrio: AI-arkitektur i praktiken, tekniskt ledarskap utan mandat, och hur rollerna inom produktutveckling konvergerar."
 >
-  <section class="app-layout pt-14 pb-10 border-b border-border">
-    <h1 class="font-lipi-sans font-semibold text-2xl md:text-3xl tracking-tight leading-snug max-w-[30ch] mb-5">
+  <section class="app-layout pt-14 pb-10 border-b border-slate-200">
+    <h1 class="font-semibold text-2xl md:text-3xl tracking-tight leading-snug max-w-[30ch] mb-5">
       Perspektiv från någon som bygger på gränsen mellan kod, produkt och design.
     </h1>
-    <p class="font-lipi-serif text-muted-foreground text-base leading-relaxed max-w-[56ch] mb-3">
+    <p class="text-slate-500 text-base leading-relaxed max-w-[56ch] mb-3">
       Jag är tech lead, sitter i en produkttrio och jobbar med AI i produktion. Här skriver
       jag om vad jag faktiskt ser förändras — AI-arkitektur i praktiken, tekniskt ledarskap
       utan mandat, och hur gränsen mellan att koda, designa och äga en produkt blir tunnare
       för varje år.
     </p>
-    <p class="font-lipi-serif text-muted-foreground text-base leading-relaxed max-w-[56ch]">
+    <p class="text-slate-500 text-base leading-relaxed max-w-[56ch]">
       Inget om hur saker borde fungera i teorin. Bara hur de fungerar när man sitter mitt i det.
     </p>
   </section>
 
   <section class="app-layout py-10 pb-16">
-    <h2 class="font-lipi-sans text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-2">
+    <h2 class="text-xs font-semibold tracking-widest uppercase text-slate-500 mb-2">
       Senaste inläggen
     </h2>
 
     {posts.length === 0 ? (
-      <p class="font-lipi-serif text-muted-foreground py-8">
+      <p class="text-slate-500 py-8">
         Första inläggen är på väg. Kom tillbaka snart, eller följ via{' '}
-        <a href="/rss.xml" class="text-primary hover:underline">RSS</a> så missar du inget.
+        <a href="/rss.xml" class="text-indigo-600 hover:underline">RSS</a> så missar du inget.
       </p>
     ) : (
       posts.map(post => (

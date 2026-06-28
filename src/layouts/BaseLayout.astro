@@ -9,7 +9,6 @@ interface Props {
   canonicalURL?: string;
   ogTitle?: string;
   ogDescription?: string;
-  showProgress?: boolean;
 }
 
 const {
@@ -18,12 +17,11 @@ const {
   canonicalURL = new URL(Astro.url.pathname, Astro.site).toString(),
   ogTitle = title,
   ogDescription = description,
-  showProgress = false,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="sv" data-theme="light">
+<html lang="sv">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,18 +39,8 @@ const {
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="generator" content={Astro.generator} />
-
-    {/* Theme init — runs before paint to avoid flash */}
-    <script is:inline>
-      (function () {
-        const stored = localStorage.getItem('theme');
-        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', stored || preferred);
-      })();
-    </script>
   </head>
-  <body class="font-lipi-sans bg-background text-foreground flex flex-col min-h-dvh selection:bg-selection">
-    {showProgress && <div class="reading-progress-bar" aria-hidden="true" />}
+  <body class="flex flex-col min-h-dvh bg-white text-slate-900">
     <Header />
     <main class="flex-1">
       <slot />
