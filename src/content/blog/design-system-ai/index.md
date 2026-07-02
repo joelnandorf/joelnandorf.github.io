@@ -4,7 +4,7 @@ description: "Vad som faktiskt förändras när AI-assistenter skriver koden —
 pubDate: 2026-06-28
 updatedDate: 2026-06-28
 tags: ["ai", "design-systems", "arkitektur", "komponenter"]
-pillar: "ai-arkitektur"
+topic: "ai-arkitektur"
 draft: false
 ---
 

@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import { TOPICS, getTopicLabel } from '../../lib/topics';
+
+export async function getStaticPaths() {
+  return TOPICS.map(topic => ({ params: { topic: topic.slug } }));
+}
+
+const { topic } = Astro.params;
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft && data.topic === topic))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const label = getTopicLabel(topic);
+---
+
+<BaseLayout
+  title={`${label} — Shift+Build`}
+  description={`Alla inlägg om ${label} på Shift+Build.`}
+>
+  <section class="app-layout pt-16 pb-14 md:pt-24 md:pb-20 text-center border-b border-outline-variant/40">
+    <span class="font-sans text-xs font-semibold tracking-[0.15em] uppercase text-accent mb-5 block">
+      Ämne
+    </span>
+    <h1 class="font-display text-4xl md:text-5xl text-ink leading-tight tracking-tight">
+      {label}
+    </h1>
+  </section>
+
+  <section class="reading-column py-16 md:py-20">
+    {posts.length === 0 ? (
+      <p class="text-ink-muted text-center py-8">Inga inlägg om {label} än.</p>
+    ) : (
+      <div class="flex flex-col gap-14 md:gap-16">
+        {posts.map((post, index) => (
+          <Fragment>
+            <ArticleCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              slug={post.id.replace(/\.md$/, '')}
+              tags={post.data.tags}
+              topic={post.data.topic}
+              heroImage={post.data.heroImage}
+              heroImageAlt={post.data.heroImageAlt}
+            />
+            {index < posts.length - 1 && (
+              <hr class="border-t-[0.5px] border-outline-variant w-16 mx-auto" />
+            )}
+          </Fragment>
+        ))}
+      </div>
+    )}
+
+    <div class="mt-16 text-center">
+      <a href={`${base}/amnen`} class="text-sm text-ink-muted hover:text-ink transition-colors">← Alla ämnen</a>
+    </div>
+  </section>
+</BaseLayout>

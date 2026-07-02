@@ -11,7 +11,7 @@ const blog = defineCollection({
         pubDate: z.coerce.date(),
         updatedDate: z.coerce.date().optional(),
         tags: z.array(z.string()).default([]),
-        pillar: z.enum(['ai-arkitektur', 'tech-lead', 'rollkonvergens']),
+        topic: z.enum(['ai-arkitektur', 'tech-lead', 'rollkonvergens']),
         draft: z.boolean().default(false),
         heroImage: image().optional(),
         heroImageAlt: z.string().optional(),

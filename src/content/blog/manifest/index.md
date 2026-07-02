@@ -3,7 +3,7 @@ title: "Shift+Build — varför jag skriver det här"
 description: "En förklaring av bloggens namn, ståndpunkt och vad du kan förvänta dig härifrån."
 pubDate: 2026-06-28
 tags: ["meta", "rollkonvergens", "introduktion"]
-pillar: "rollkonvergens"
+topic: "rollkonvergens"
 draft: false
 ---
 
