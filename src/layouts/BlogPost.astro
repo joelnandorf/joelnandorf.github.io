@@ -47,17 +47,19 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   ogDescription={description}
 >
   <article class="pt-10 md:pt-16">
-    {heroImage && (
-      <div class="reading-column mb-10 md:mb-14">
-        <Image
-          src={heroImage}
-          alt={heroImageAlt ?? ''}
-          class="w-full h-auto aspect-[3/2] object-cover rounded"
-          widths={[400, 800, 1200]}
-          sizes="(min-width: 45rem) 720px, 100vw"
-        />
-      </div>
-    )}
+    {
+      heroImage && (
+        <div class="reading-column mb-10 md:mb-14">
+          <Image
+            src={heroImage}
+            alt={heroImageAlt ?? ''}
+            class="w-full h-auto aspect-[3/2] object-cover rounded"
+            widths={[400, 800, 1200]}
+            sizes="(min-width: 45rem) 720px, 100vw"
+          />
+        </div>
+      )
+    }
 
     <header class="reading-column text-center mb-12 md:mb-16">
       <a
@@ -71,20 +73,31 @@ const dateOptions: Intl.DateTimeFormatOptions = {
         {title}
       </h1>
 
-      <p class="text-ink-muted text-lg md:text-xl leading-relaxed max-w-[46ch] mx-auto mb-6">
+      <p
+        class="text-ink-muted text-lg md:text-xl leading-relaxed max-w-[46ch] mx-auto mb-6"
+      >
         {description}
       </p>
 
-      <div class="flex flex-wrap items-center justify-center gap-2 text-sm text-ink-muted">
+      <div
+        class="flex flex-wrap items-center justify-center gap-2 text-sm text-ink-muted"
+      >
         <span>Joel Nandorf</span>
         <span class="text-outline-variant">•</span>
-        <time datetime={pubDate.toISOString()}>{pubDate.toLocaleDateString('sv-SE', dateOptions)}</time>
-        {updatedDate && updatedDate > pubDate && (
-          <Fragment>
-            <span class="text-outline-variant">•</span>
-            <span class="italic">Uppdaterad {updatedDate.toLocaleDateString('sv-SE', dateOptions)}</span>
-          </Fragment>
-        )}
+        <time datetime={pubDate.toISOString()}
+          >{pubDate.toLocaleDateString('sv-SE', dateOptions)}</time
+        >
+        {
+          updatedDate && updatedDate > pubDate && (
+            <Fragment>
+              <span class="text-outline-variant">•</span>
+              <span class="italic">
+                Uppdaterad{' '}
+                {updatedDate.toLocaleDateString('sv-SE', dateOptions)}
+              </span>
+            </Fragment>
+          )
+        }
       </div>
     </header>
 
@@ -106,74 +119,92 @@ const dateOptions: Intl.DateTimeFormatOptions = {
       <slot />
     </div>
 
-    {tags.length > 0 && (
-      <div class="reading-column mt-14 pt-8 border-t border-outline-variant/40 flex flex-wrap gap-2 justify-center">
-        {tags.map(tag => (
-          <span class="text-xs text-ink-muted bg-surface-container-low rounded-full px-3 py-1">{tag}</span>
-        ))}
-      </div>
-    )}
+    {
+      tags.length > 0 && (
+        <div class="reading-column mt-14 pt-8 border-t border-outline-variant/40 flex flex-wrap gap-2 justify-center">
+          {tags.map((tag) => (
+            <span class="text-xs text-ink-muted bg-surface-container-low rounded-full px-3 py-1">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
 
     <div class="reading-column mt-10">
       <div class="bg-surface-container-low rounded p-6 md:p-8 text-center">
         <p class="text-sm mb-2">
-          <strong class="font-display text-base">Joel Nandorf</strong> är tech lead i Umeå och skriver om AI-arkitektur,
-          tekniskt ledarskap och hur rollerna inom produktutveckling konvergerar.
+          <strong class="font-display text-base">Joel Nandorf</strong> är tech lead
+          i Umeå och skriver om AI-arkitektur, tekniskt ledarskap och hur rollerna
+          inom produktutveckling konvergerar.
         </p>
         <p class="text-sm text-ink-muted">
           Gillade du det här? Följ via{' '}
-          <a href={`${base}/rss.xml`} class="text-accent underline decoration-accent underline-offset-4">RSS</a> eller hör av dig på{' '}
+          <a
+            href={`${base}/rss.xml`}
+            class="text-accent underline decoration-accent underline-offset-4"
+            >RSS</a
+          > eller hör av dig på{' '}
           <a
             href="https://www.linkedin.com/in/joelnandorf"
             rel="noopener noreferrer"
             target="_blank"
             class="text-accent underline decoration-accent underline-offset-4"
-          >LinkedIn</a> — jag svarar gärna.
+            >LinkedIn</a
+          > — jag svarar gärna.
         </p>
       </div>
     </div>
 
     <div class="reading-column mt-10 mb-16 md:mb-24 text-center">
-      <a href={base || '/'} class="text-sm text-ink-muted hover:text-ink transition-colors">← Alla inlägg</a>
+      <a
+        href={base || '/'}
+        class="text-sm text-ink-muted hover:text-ink transition-colors"
+        >← Alla inlägg</a
+      >
     </div>
   </article>
 
-  {relatedPosts.length > 0 && (
-    <section class="border-t border-outline-variant/40 bg-surface-container-low">
-      <div class="app-layout py-14 md:py-16">
-        <h3 class="font-display text-2xl md:text-3xl text-ink text-center mb-10">Läs vidare</h3>
-        <div class="reading-column grid grid-cols-1 md:grid-cols-2 gap-10">
-          {relatedPosts.map(rp => (
-            <div class="group relative block">
-              {rp.data.heroImage && (
-                <div class="aspect-[3/2] overflow-hidden rounded mb-4 bg-surface-container-high">
-                  <Image
-                    src={rp.data.heroImage}
-                    alt={rp.data.heroImageAlt ?? ''}
-                    width={480}
-                    height={320}
-                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-              )}
-              <a
-                href={`${base}/amnen/${rp.data.topic}`}
-                class="relative z-10 font-sans text-xs font-semibold tracking-[0.15em] uppercase text-accent no-underline hover:underline"
-              >
-                {getTopicLabel(rp.data.topic)}
-              </a>
-              <h4 class="font-display text-xl text-ink mt-2 group-hover:text-accent transition-colors">
+  {
+    relatedPosts.length > 0 && (
+      <section class="border-t border-outline-variant/40 bg-surface-container-low">
+        <div class="app-layout py-14 md:py-16">
+          <h3 class="font-display text-2xl md:text-3xl text-ink text-center mb-10">
+            Läs vidare
+          </h3>
+          <div class="reading-column grid grid-cols-1 md:grid-cols-2 gap-10">
+            {relatedPosts.map((rp) => (
+              <div class="group relative block">
+                {rp.data.heroImage && (
+                  <div class="aspect-[3/2] overflow-hidden rounded mb-4 bg-surface-container-high">
+                    <Image
+                      src={rp.data.heroImage}
+                      alt={rp.data.heroImageAlt ?? ''}
+                      width={480}
+                      height={320}
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
                 <a
-                  href={`${base}/blog/${rp.id.replace(/\.md$/, '')}`}
-                  class="no-underline text-inherit after:absolute after:inset-0"
+                  href={`${base}/amnen/${rp.data.topic}`}
+                  class="relative z-10 font-sans text-xs font-semibold tracking-[0.15em] uppercase text-accent no-underline hover:underline"
                 >
-                  {rp.data.title}
+                  {getTopicLabel(rp.data.topic)}
                 </a>
-              </h4>
-            </div>
-          ))}
+                <h4 class="font-display text-xl text-ink mt-2 group-hover:text-accent transition-colors">
+                  <a
+                    href={`${base}/blog/${rp.id.replace(/\.md$/, '')}`}
+                    class="no-underline text-inherit after:absolute after:inset-0"
+                  >
+                    {rp.data.title}
+                  </a>
+                </h4>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 </BaseLayout>

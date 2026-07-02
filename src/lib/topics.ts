@@ -5,5 +5,5 @@ export const TOPICS = [
 ] as const;
 
 export function getTopicLabel(slug: string): string {
-  return TOPICS.find(t => t.slug === slug)?.label ?? slug;
+  return TOPICS.find((t) => t.slug === slug)?.label ?? slug;
 }

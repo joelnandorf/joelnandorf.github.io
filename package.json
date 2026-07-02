@@ -7,7 +7,10 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
@@ -16,5 +19,14 @@
     "@tailwindcss/vite": "^4.3.1",
     "astro": "^7.0.3",
     "tailwindcss": "^4.3.1"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "prettier": "^3.9.4",
+    "prettier-plugin-astro": "^0.14.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,astro,json,css,md,mjs,cjs}": "prettier --write"
   }
 }

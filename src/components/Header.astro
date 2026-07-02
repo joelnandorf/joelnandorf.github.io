@@ -12,7 +12,9 @@ const homeHref = base || '/';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-outline-variant/40">
+<header
+  class="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-outline-variant/40"
+>
   <div class="app-layout flex items-center justify-between h-16 md:h-20">
     <a
       href={base || '/'}
@@ -22,25 +24,30 @@ const currentPath = Astro.url.pathname;
       Shift<span class="text-accent">+</span>Build
     </a>
 
-    <nav class="flex items-center gap-6 md:gap-8 text-sm" aria-label="Huvudnavigation">
-      {navLinks.map(link => {
-        const isActive =
-          currentPath === link.href ||
-          (link.href !== homeHref && currentPath.startsWith(`${link.href}/`));
-        return (
-          <a
-            href={link.href}
-            aria-current={isActive ? 'page' : undefined}
-            class={`pb-1 border-b no-underline transition-colors duration-300 ${
-              isActive
-                ? 'text-ink border-ink'
-                : 'text-ink-muted border-transparent hover:text-ink hover:border-outline-variant'
-            }`}
-          >
-            {link.label}
-          </a>
-        );
-      })}
+    <nav
+      class="flex items-center gap-6 md:gap-8 text-sm"
+      aria-label="Huvudnavigation"
+    >
+      {
+        navLinks.map((link) => {
+          const isActive =
+            currentPath === link.href ||
+            (link.href !== homeHref && currentPath.startsWith(`${link.href}/`));
+          return (
+            <a
+              href={link.href}
+              aria-current={isActive ? 'page' : undefined}
+              class={`pb-1 border-b no-underline transition-colors duration-300 ${
+                isActive
+                  ? 'text-ink border-ink'
+                  : 'text-ink-muted border-transparent hover:text-ink hover:border-outline-variant'
+              }`}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
     </nav>
   </div>
 </header>

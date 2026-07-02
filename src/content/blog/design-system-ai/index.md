@@ -1,10 +1,10 @@
 ---
-title: "Design systems i en AI-assisterad kodbas"
-description: "Vad som faktiskt förändras när AI-assistenter skriver koden — och vad det ställer för krav på hur vi definierar komponentbibliotek och designtokens."
+title: 'Design systems i en AI-assisterad kodbas'
+description: 'Vad som faktiskt förändras när AI-assistenter skriver koden — och vad det ställer för krav på hur vi definierar komponentbibliotek och designtokens.'
 pubDate: 2026-06-28
 updatedDate: 2026-06-28
-tags: ["ai", "design-systems", "arkitektur", "komponenter"]
-topic: "ai-arkitektur"
+tags: ['ai', 'design-systems', 'arkitektur', 'komponenter']
+topic: 'ai-arkitektur'
 draft: false
 ---
 
@@ -70,14 +70,14 @@ interface FieldProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-// Version 2 — semantiskt orienterat  
+// Version 2 — semantiskt orienterat
 interface FieldProps {
   label: string;
   value: string;
-  validationError?: string;     // Fel som uppstår efter validering
-  helpText?: string;            // Kontextuell hjälptext, visas alltid
-  isReadOnly?: boolean;         // Fältet visas men kan inte redigeras
-  isDisabled?: boolean;         // Fältet är inaktiverat av en systemregel
+  validationError?: string; // Fel som uppstår efter validering
+  helpText?: string; // Kontextuell hjälptext, visas alltid
+  isReadOnly?: boolean; // Fältet visas men kan inte redigeras
+  isDisabled?: boolean; // Fältet är inaktiverat av en systemregel
 }
 ```
 
@@ -87,13 +87,13 @@ Multiplicera den skillnaden med ett komponentbibliotek på 80 komponenter.
 
 ## Det du inte kan lägga i ett komponentbibliotek
 
-Allt ovan handlar om vad du *kan* formalisera. Men den tysta kunskapen — konventionen, det tredje lagret — är svårare.
+Allt ovan handlar om vad du _kan_ formalisera. Men den tysta kunskapen — konventionen, det tredje lagret — är svårare.
 
 Hur dokumenterar man att `Toast`-notifikationer aldrig ska triggas av en bakgrundsprocess om inte användaren initierade den processen? Att vi föredrar optimistisk uppdatering i listan men pessimistisk i detaljer? Att vår `Dialog` alltid ska ha en tydlig escape route — inte bara ett kryss, utan en faktisk anledning att stänga?
 
 Den kunskapen lever i kodereviewer. I kommentarer på pull requests. I postmortems efter UX-problem.
 
-Det vi har börjat göra är att destillera den in i vad vi kallar *kontext-dokument* — korta, opinionerade texter om en specifik del av gränssnittet som går in i prompten när en assistent arbetar med den delen. Inte komponentdokumentation, utan designreasoning i prosaform.
+Det vi har börjat göra är att destillera den in i vad vi kallar _kontext-dokument_ — korta, opinionerade texter om en specifik del av gränssnittet som går in i prompten när en assistent arbetar med den delen. Inte komponentdokumentation, utan designreasoning i prosaform.
 
 ```markdown
 # Toast-konventioner
@@ -103,7 +103,7 @@ Bakgrundsprocesser (sync, auto-save) är tysta om de lyckas.
 Felmeddelanden från bakgrundsprocesser visas inline, aldrig som Toast.
 
 Anledning: Toast bryter fokus. Användaren befinner sig mitt i en annan uppgift.
-Att avbryta den med ett meddelande om något de inte initierade skapar mer 
+Att avbryta den med ett meddelande om något de inte initierade skapar mer
 oro än information.
 ```
 
@@ -113,7 +113,7 @@ Det är sex rader som eliminerar en hel kategori av fel.
 
 Design systems har alltid handlat om att koda in beslut så att inte varje ny komponent kräver att samma beslut fattas om igen. Det är fortfarande sant.
 
-Det som förändras är att beslutfattaren nu delvis är en AI-assistent som saknar långtidsminne och bygger sin förståelse uteslutande på vad du explicit berättar. Det ställer högre krav på att de besluten är *explicita* — inte underförstådda i konvention, inte inbäddade i "vi brukar göra så här"-kulturen, utan faktiskt skrivna ner på ett sätt som bär semantisk information.
+Det som förändras är att beslutfattaren nu delvis är en AI-assistent som saknar långtidsminne och bygger sin förståelse uteslutande på vad du explicit berättar. Det ställer högre krav på att de besluten är _explicita_ — inte underförstådda i konvention, inte inbäddade i "vi brukar göra så här"-kulturen, utan faktiskt skrivna ner på ett sätt som bär semantisk information.
 
 Det är i praktiken en bättre form av design system-dokumentation. Mer precis, mer avsiktlig, mer anpassad till en läsare som inte fyller i luckorna med erfarenhet.
 

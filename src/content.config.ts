@@ -16,7 +16,7 @@ const blog = defineCollection({
         heroImage: image().optional(),
         heroImageAlt: z.string().optional(),
       })
-      .refine(data => !data.heroImage || !!data.heroImageAlt, {
+      .refine((data) => !data.heroImage || !!data.heroImageAlt, {
         message: 'heroImageAlt is required when heroImage is set',
         path: ['heroImageAlt'],
       }),
