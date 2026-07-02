@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
@@ -12,9 +13,20 @@ interface Props {
   pillar: string;
   heroImage?: ImageMetadata;
   heroImageAlt?: string;
+  relatedPosts?: CollectionEntry<'blog'>[];
 }
 
-const { title, description, pubDate, updatedDate, tags, pillar, heroImage, heroImageAlt } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  tags,
+  pillar,
+  heroImage,
+  heroImageAlt,
+  relatedPosts = [],
+} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -39,80 +51,123 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   ogTitle={title}
   ogDescription={description}
 >
-  <article class="app-layout py-12 md:py-16">
+  <article class="pt-10 md:pt-16">
     {heroImage && (
-      <Image
-        src={heroImage}
-        alt={heroImageAlt ?? ''}
-        class="w-full h-auto rounded-lg mb-10"
-        widths={[400, 800, 1200]}
-        sizes="(min-width: 44rem) 44rem, 100vw"
-      />
-    )}
-    <header class="mb-10 pb-8 border-b border-slate-200">
-      <div class="flex items-center gap-3 flex-wrap mb-4">
-        <span class="text-xs font-semibold tracking-widest uppercase text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded">
-          {pillarLabels[pillar] ?? pillar}
-        </span>
-        <time
-          datetime={pubDate.toISOString()}
-          class="text-sm text-slate-500"
-        >
-          {pubDate.toLocaleDateString('sv-SE', dateOptions)}
-        </time>
-        {updatedDate && updatedDate > pubDate && (
-          <span class="text-sm text-slate-500 italic">
-            Uppdaterad {updatedDate.toLocaleDateString('sv-SE', dateOptions)}
-          </span>
-        )}
+      <div class="reading-column mb-10 md:mb-14">
+        <Image
+          src={heroImage}
+          alt={heroImageAlt ?? ''}
+          class="w-full h-auto aspect-[3/2] object-cover rounded"
+          widths={[400, 800, 1200]}
+          sizes="(min-width: 45rem) 720px, 100vw"
+        />
       </div>
+    )}
 
-      <h1 class="text-3xl md:text-4xl font-semibold tracking-tight leading-tight mb-3">
+    <header class="reading-column text-center mb-12 md:mb-16">
+      <span class="font-sans text-xs font-semibold tracking-[0.15em] uppercase text-accent mb-5 block">
+        {pillarLabels[pillar] ?? pillar}
+      </span>
+
+      <h1 class="font-display text-4xl md:text-5xl text-ink leading-tight mb-6">
         {title}
       </h1>
-      <p class="text-lg text-slate-500 leading-relaxed">
+
+      <p class="text-ink-muted text-lg md:text-xl leading-relaxed max-w-[46ch] mx-auto mb-6">
         {description}
       </p>
 
-      {tags.length > 0 && (
-        <div class="flex gap-2 flex-wrap mt-4">
-          {tags.map(tag => (
-            <span class="font-mono text-xs text-slate-500 bg-slate-100 border border-slate-200 rounded px-2 py-0.5">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
+      <div class="flex flex-wrap items-center justify-center gap-2 text-sm text-ink-muted">
+        <span>Joel Nandorf</span>
+        <span class="text-outline-variant">•</span>
+        <time datetime={pubDate.toISOString()}>{pubDate.toLocaleDateString('sv-SE', dateOptions)}</time>
+        {updatedDate && updatedDate > pubDate && (
+          <Fragment>
+            <span class="text-outline-variant">•</span>
+            <span class="italic">Uppdaterad {updatedDate.toLocaleDateString('sv-SE', dateOptions)}</span>
+          </Fragment>
+        )}
+      </div>
     </header>
 
-    <div class="prose prose-slate max-w-none prose-img:rounded-lg">
+    <div
+      class="reading-column prose prose-lg max-w-none
+      prose-headings:font-display prose-headings:text-ink prose-headings:font-normal prose-headings:tracking-tight
+      prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-5
+      prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4
+      prose-p:text-ink-muted prose-p:leading-relaxed
+      prose-li:text-ink-muted
+      prose-a:text-accent prose-a:underline prose-a:decoration-accent prose-a:decoration-1 prose-a:underline-offset-4 prose-a:font-normal hover:prose-a:decoration-2
+      prose-strong:text-ink prose-strong:font-semibold
+      prose-blockquote:font-display prose-blockquote:not-italic prose-blockquote:border-l-2 prose-blockquote:border-accent prose-blockquote:text-ink prose-blockquote:text-xl prose-blockquote:leading-snug prose-blockquote:py-1
+      prose-code:font-mono prose-code:text-sm prose-code:bg-surface-container-low prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-surface-container prose-pre:rounded
+      prose-img:rounded
+      prose-hr:border-outline-variant"
+    >
       <slot />
     </div>
 
-    <footer class="mt-12">
-      <hr class="border-slate-200 mb-8" />
-      <div class="bg-slate-50 border border-slate-200 rounded-lg p-5 mb-6">
-        <p class="text-sm mb-1">
-          <strong>Joel Nandorf</strong> är tech lead i Umeå och skriver om AI-arkitektur,
+    {tags.length > 0 && (
+      <div class="reading-column mt-14 pt-8 border-t border-outline-variant/40 flex flex-wrap gap-2 justify-center">
+        {tags.map(tag => (
+          <span class="text-xs text-ink-muted bg-surface-container-low rounded-full px-3 py-1">{tag}</span>
+        ))}
+      </div>
+    )}
+
+    <div class="reading-column mt-10">
+      <div class="bg-surface-container-low rounded p-6 md:p-8 text-center">
+        <p class="text-sm mb-2">
+          <strong class="font-display text-base">Joel Nandorf</strong> är tech lead i Umeå och skriver om AI-arkitektur,
           tekniskt ledarskap och hur rollerna inom produktutveckling konvergerar.
         </p>
-        <p class="text-sm text-slate-500">
+        <p class="text-sm text-ink-muted">
           Gillade du det här? Följ via{' '}
-          <a href={`${base}/rss.xml`} class="text-indigo-600 hover:underline">RSS</a> eller hör av dig på{' '}
+          <a href={`${base}/rss.xml`} class="text-accent underline decoration-accent underline-offset-4">RSS</a> eller hör av dig på{' '}
           <a
             href="https://www.linkedin.com/in/joelnandorf"
             rel="noopener noreferrer"
             target="_blank"
-            class="text-indigo-600 hover:underline"
+            class="text-accent underline decoration-accent underline-offset-4"
           >LinkedIn</a> — jag svarar gärna.
         </p>
       </div>
-      <a
-        href={base || '/'}
-        class="text-sm text-slate-500 hover:text-indigo-600 transition-colors"
-      >
-        ← Alla inlägg
-      </a>
-    </footer>
+    </div>
+
+    <div class="reading-column mt-10 mb-16 md:mb-24 text-center">
+      <a href={base || '/'} class="text-sm text-ink-muted hover:text-ink transition-colors">← Alla inlägg</a>
+    </div>
   </article>
+
+  {relatedPosts.length > 0 && (
+    <section class="border-t border-outline-variant/40 bg-surface-container-low">
+      <div class="app-layout py-14 md:py-16">
+        <h3 class="font-display text-2xl md:text-3xl text-ink text-center mb-10">Läs vidare</h3>
+        <div class="reading-column grid grid-cols-1 md:grid-cols-2 gap-10">
+          {relatedPosts.map(rp => (
+            <a href={`${base}/blog/${rp.id.replace(/\.md$/, '')}`} class="group block no-underline">
+              {rp.data.heroImage && (
+                <div class="aspect-[3/2] overflow-hidden rounded mb-4 bg-surface-container-high">
+                  <Image
+                    src={rp.data.heroImage}
+                    alt={rp.data.heroImageAlt ?? ''}
+                    width={480}
+                    height={320}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              )}
+              <span class="font-sans text-xs font-semibold tracking-[0.15em] uppercase text-accent">
+                {pillarLabels[rp.data.pillar] ?? rp.data.pillar}
+              </span>
+              <h4 class="font-display text-xl text-ink mt-2 group-hover:text-accent transition-colors">
+                {rp.data.title}
+              </h4>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>

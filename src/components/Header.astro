@@ -10,28 +10,33 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="border-b border-slate-200 bg-white/90 backdrop-blur-sm sticky top-0 z-40">
-  <div class="app-layout">
-    <div class="flex items-center justify-between h-14">
-      <a
-        href={base || '/'}
-        class="font-bold text-base tracking-tight text-slate-900 hover:text-slate-700 no-underline"
-        aria-label="Shift+Build — hem"
-      >
-        Shift<span class="text-indigo-600">+</span>Build
-      </a>
+<header class="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-outline-variant/40">
+  <div class="app-layout flex items-center justify-between h-16 md:h-20">
+    <a
+      href={base || '/'}
+      class="font-display text-xl md:text-2xl text-ink tracking-tight no-underline hover:text-accent transition-colors"
+      aria-label="Shift+Build — hem"
+    >
+      Shift<span class="text-accent">+</span>Build
+    </a>
 
-      <nav class="flex items-center gap-0.5" aria-label="Huvudnavigation">
-        {navLinks.map(link => (
+    <nav class="flex items-center gap-6 md:gap-8 text-sm" aria-label="Huvudnavigation">
+      {navLinks.map(link => {
+        const isActive = currentPath === link.href;
+        return (
           <a
             href={link.href}
-            aria-current={currentPath === link.href ? 'page' : undefined}
-            class="text-sm text-slate-500 hover:text-slate-900 px-3 py-1.5 rounded transition-colors aria-[current=page]:text-slate-900"
+            aria-current={isActive ? 'page' : undefined}
+            class={`pb-1 border-b no-underline transition-colors duration-300 ${
+              isActive
+                ? 'text-ink border-ink'
+                : 'text-ink-muted border-transparent hover:text-ink hover:border-outline-variant'
+            }`}
           >
             {link.label}
           </a>
-        ))}
-      </nav>
-    </div>
+        );
+      })}
+    </nav>
   </div>
 </header>
