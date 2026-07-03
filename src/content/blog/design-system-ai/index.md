@@ -6,6 +6,8 @@ updatedDate: 2026-06-28
 tags: ['ai', 'design-systems', 'arkitektur', 'komponenter']
 topic: 'ai-arkitektur'
 draft: false
+heroImage: './cover.jpg'
+heroImageAlt: 'Abstrakt komposition av överlappande rektanglar i varma toner, som symboliserar designtokens och komponentbibliotek'
 ---
 
 Det var en vardag i mars som jag insåg att vår komponentdokumentation hade fel målgrupp.
