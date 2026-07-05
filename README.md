@@ -2,7 +2,7 @@
 
 Anteckningar mitt i ett skifte — där utvecklare, designer och produktmanagers blir byggare med hjälp av AI.
 
-Bloggen finns publicerad på [joelnandorf.github.io/blogg](https://joelnandorf.github.io/blogg).
+Bloggen finns publicerad på [nandorf.dev](https://nandorf.dev).
 
 ## Tech stack
 
