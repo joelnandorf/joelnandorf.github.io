@@ -3,8 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://joelnandorf.github.io',
-  base: '/blogg',
+  site: 'https://nandorf.dev',
   integrations: [sitemap()],
   markdown: {
     shikiConfig: {
