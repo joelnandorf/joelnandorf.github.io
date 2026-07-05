@@ -13,7 +13,7 @@ Bloggen finns publicerad på [nandorf.dev](https://nandorf.dev).
 
 ## Kom igång
 
-Kräver Node.js 22.
+Kräver Node.js 24.
 
 ```bash
 npm install
