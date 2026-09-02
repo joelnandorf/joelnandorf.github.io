@@ -46,51 +46,49 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   ogTitle={title}
   ogDescription={description}
 >
-  <article class="pt-10 md:pt-16">
+  <article class="pb-16 md:pb-20">
     {
       heroImage && (
-        <div class="reading-column mb-10 md:mb-14">
+        <div class="measure mb-10 md:mb-12">
           <Image
             src={heroImage}
             alt={heroImageAlt ?? ''}
-            class="w-full h-auto aspect-[3/2] object-cover rounded dark:opacity-90"
+            class="w-full h-auto aspect-[3/2] object-cover dark:opacity-90"
             widths={[400, 800, 1200]}
-            sizes="(min-width: 45rem) 720px, 100vw"
+            sizes="(min-width: 45rem) 736px, 100vw"
           />
         </div>
       )
     }
 
-    <header class="reading-column text-center mb-12 md:mb-16">
+    <header class="measure mb-10 md:mb-12 pb-9 border-b border-outline-variant">
       <a
         href={`${base}/amnen/${topic}`}
-        class="font-sans text-xs font-semibold tracking-[0.15em] uppercase text-accent mb-5 block no-underline hover:underline"
+        class="text-[11px] font-medium tracking-[0.08em] uppercase text-accent mb-4 block no-underline hover:underline"
       >
         {getTopicLabel(topic)}
       </a>
 
-      <h1 class="font-display text-4xl md:text-5xl text-ink leading-tight mb-6">
+      <h1
+        class="font-display text-[32px] md:text-[44px] leading-[1.15] tracking-tight text-ink mb-5"
+      >
         {title}
       </h1>
 
-      <p
-        class="text-ink-muted text-lg md:text-xl leading-relaxed max-w-[46ch] mx-auto mb-6"
-      >
+      <p class="text-ink-muted text-lg leading-relaxed mb-5">
         {description}
       </p>
 
-      <div
-        class="flex flex-wrap items-center justify-center gap-2 text-sm text-ink-muted"
-      >
+      <div class="flex flex-wrap items-center gap-2 text-sm text-ink-muted">
         <span>Joel Nandorf</span>
-        <span class="text-outline-variant">•</span>
-        <time datetime={pubDate.toISOString()}
+        <span class="text-outline-variant">·</span>
+        <time datetime={pubDate.toISOString()} class="font-mono text-[13px]"
           >{pubDate.toLocaleDateString('sv-SE', dateOptions)}</time
         >
         {
           updatedDate && updatedDate > pubDate && (
             <Fragment>
-              <span class="text-outline-variant">•</span>
+              <span class="text-outline-variant">·</span>
               <span class="italic">
                 Uppdaterad{' '}
                 {updatedDate.toLocaleDateString('sv-SE', dateOptions)}
@@ -102,7 +100,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
     </header>
 
     <div
-      class="reading-column prose prose-lg max-w-none
+      class="measure prose prose-lg max-w-none
       prose-headings:font-display prose-headings:text-ink prose-headings:font-normal prose-headings:tracking-tight
       prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-5
       prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4
@@ -111,9 +109,8 @@ const dateOptions: Intl.DateTimeFormatOptions = {
       prose-a:text-accent prose-a:underline prose-a:decoration-accent prose-a:decoration-1 prose-a:underline-offset-4 prose-a:font-normal hover:prose-a:decoration-2
       prose-strong:text-ink prose-strong:font-semibold
       prose-blockquote:font-display prose-blockquote:not-italic prose-blockquote:border-l-2 prose-blockquote:border-accent prose-blockquote:text-ink prose-blockquote:text-xl prose-blockquote:leading-snug prose-blockquote:py-1
-      prose-code:font-mono prose-code:text-sm prose-code:bg-surface-container-low prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-      prose-pre:bg-surface-container prose-pre:rounded
-      prose-img:rounded
+      prose-code:font-mono prose-code:text-sm prose-code:text-ink prose-code:bg-surface-container-low prose-code:px-1.5 prose-code:py-0.5 prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-surface-container
       prose-hr:border-outline-variant"
     >
       <slot />
@@ -121,42 +118,38 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 
     {
       tags.length > 0 && (
-        <div class="reading-column mt-14 pt-8 border-t border-outline-variant/40 flex flex-wrap gap-2 justify-center">
+        <div class="measure mt-12 pt-6 border-t border-outline-variant flex flex-wrap gap-x-4 gap-y-2">
           {tags.map((tag) => (
-            <span class="text-xs text-ink-muted bg-surface-container-low rounded-full px-3 py-1">
-              {tag}
-            </span>
+            <span class="font-mono text-[11px] text-ink-muted">#{tag}</span>
           ))}
         </div>
       )
     }
 
-    <div class="reading-column mt-10">
-      <div class="bg-surface-container-low rounded p-6 md:p-8 text-center">
-        <p class="text-sm mb-2">
-          <strong class="font-display text-base">Joel Nandorf</strong> är tech lead
-          i Umeå och skriver om AI-arkitektur, tekniskt ledarskap och hur rollerna
-          inom produktutveckling konvergerar.
-        </p>
-        <p class="text-sm text-ink-muted">
-          Gillade du det här? Följ via{' '}
-          <a
-            href={`${base}/rss.xml`}
-            class="text-accent underline decoration-accent underline-offset-4"
-            >RSS</a
-          > eller hör av dig på{' '}
-          <a
-            href="https://www.linkedin.com/in/joelnandorf"
-            rel="noopener noreferrer"
-            target="_blank"
-            class="text-accent underline decoration-accent underline-offset-4"
-            >LinkedIn</a
-          > — jag svarar gärna.
-        </p>
-      </div>
+    <div class="measure mt-10 py-8 border-t border-b border-outline-variant">
+      <p class="text-sm mb-2">
+        <strong class="font-display text-base">Joel Nandorf</strong> är tech lead
+        i Umeå och skriver om AI-arkitektur, tekniskt ledarskap och hur rollerna inom
+        produktutveckling konvergerar.
+      </p>
+      <p class="text-sm text-ink-muted">
+        Gillade du det här? Följ via{' '}
+        <a
+          href={`${base}/rss.xml`}
+          class="text-accent underline decoration-accent underline-offset-4"
+          >RSS</a
+        > eller hör av dig på{' '}
+        <a
+          href="https://www.linkedin.com/in/joelnandorf"
+          rel="noopener noreferrer"
+          target="_blank"
+          class="text-accent underline decoration-accent underline-offset-4"
+          >LinkedIn</a
+        > — jag svarar gärna.
+      </p>
     </div>
 
-    <div class="reading-column mt-10 mb-16 md:mb-24 text-center">
+    <div class="measure mt-8">
       <a
         href={base || '/'}
         class="text-sm text-ink-muted hover:text-ink transition-colors"
@@ -167,42 +160,29 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 
   {
     relatedPosts.length > 0 && (
-      <section class="border-t border-outline-variant/40 bg-surface-container-low">
-        <div class="app-layout py-14 md:py-16">
-          <h3 class="font-display text-2xl md:text-3xl text-ink text-center mb-10">
-            Läs vidare
-          </h3>
-          <div class="reading-column grid grid-cols-1 md:grid-cols-2 gap-10">
-            {relatedPosts.map((rp) => (
-              <div class="group relative block">
-                {rp.data.heroImage && (
-                  <div class="aspect-[3/2] overflow-hidden rounded mb-4 bg-surface-container-high">
-                    <Image
-                      src={rp.data.heroImage}
-                      alt={rp.data.heroImageAlt ?? ''}
-                      width={480}
-                      height={320}
-                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 dark:opacity-90 dark:group-hover:opacity-100"
-                    />
-                  </div>
-                )}
+      <section class="measure pb-16 md:pb-20 pt-9 border-t border-outline-variant">
+        <span class="block text-[11px] font-medium tracking-[0.08em] uppercase text-ink-muted mb-8">
+          Läs vidare
+        </span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {relatedPosts.map((rp) => (
+            <div class="group relative block">
+              <a
+                href={`${base}/amnen/${rp.data.topic}`}
+                class="relative z-10 text-[11px] font-medium tracking-[0.08em] uppercase text-accent no-underline hover:underline"
+              >
+                {getTopicLabel(rp.data.topic)}
+              </a>
+              <h4 class="font-display text-xl text-ink mt-2 leading-snug group-hover:text-accent transition-colors">
                 <a
-                  href={`${base}/amnen/${rp.data.topic}`}
-                  class="relative z-10 font-sans text-xs font-semibold tracking-[0.15em] uppercase text-accent no-underline hover:underline"
+                  href={`${base}/blog/${rp.id.replace(/\.md$/, '')}`}
+                  class="no-underline text-inherit after:absolute after:inset-0"
                 >
-                  {getTopicLabel(rp.data.topic)}
+                  {rp.data.title}
                 </a>
-                <h4 class="font-display text-xl text-ink mt-2 group-hover:text-accent transition-colors">
-                  <a
-                    href={`${base}/blog/${rp.id.replace(/\.md$/, '')}`}
-                    class="no-underline text-inherit after:absolute after:inset-0"
-                  >
-                    {rp.data.title}
-                  </a>
-                </h4>
-              </div>
-            ))}
-          </div>
+              </h4>
+            </div>
+          ))}
         </div>
       </section>
     )

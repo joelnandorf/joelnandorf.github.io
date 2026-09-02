@@ -10,14 +10,14 @@
   --color-surface-container: #efeeec;
   --color-surface-container-high: #e9e8e6;
   --color-ink: #1a1c1b;
-  --color-ink-muted: #444845;
-  --color-outline: #747875;
-  --color-outline-variant: #c4c7c4;
-  --color-accent: #6e5c37;
-  --color-accent-soft: #f6ddae;
+  --color-ink-muted: #494d4a;
+  --color-outline: #6b6f6c;
+  --color-outline-variant: #dbd9d4;
+  --color-accent: #c2410c;
 
   --font-display: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', Menlo, Monaco, 'Lucida Console', monospace;
 }
 
 /* "After-Hours" dark palette — same tokens, nocturnal values. */
@@ -27,12 +27,11 @@
   --color-surface-container-low: #1a1c1b;
   --color-surface-container: #1e201f;
   --color-surface-container-high: #282a29;
-  --color-ink: #e2e3e0;
+  --color-ink: #e7e8e5;
   --color-ink-muted: #c4c7c5;
   --color-outline: #8e928f;
-  --color-outline-variant: #434846;
-  --color-accent: #c5c7c4;
-  --color-accent-soft: #444845;
+  --color-outline-variant: #383b39;
+  --color-accent: #e8834a;
   color-scheme: dark;
 }
 
@@ -72,27 +71,10 @@
 }
 
 @layer components {
-  .app-layout {
-    width: 100%;
-    max-width: 1120px;
-    margin-inline: auto;
-    padding-inline: 1.25rem;
-  }
-
-  .reading-column {
-    width: 100%;
-    max-width: 720px;
-    margin-inline: auto;
-    padding-inline: 1.25rem;
-  }
-
-  @media (min-width: 768px) {
-    .app-layout {
-      padding-inline: 2rem;
-    }
-
-    .reading-column {
-      padding-inline: 0;
-    }
+  /* Shared text measure — every rule and every line of copy in the content
+     column ties back to this width so hairlines never overshoot the text
+     they divide. */
+  .measure {
+    max-width: 46rem;
   }
 }

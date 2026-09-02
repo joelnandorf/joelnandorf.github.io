@@ -15,39 +15,33 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   description="Perspektiv från en tech lead i en produkttrio: AI-arkitektur i praktiken, tekniskt ledarskap utan mandat, och hur rollerna inom produktutveckling konvergerar."
 >
   <section
-    class="app-layout pt-16 pb-14 md:pt-24 md:pb-20 text-center border-b border-outline-variant/40"
+    class="measure pb-11 md:pb-12 mb-8 md:mb-9 border-b border-outline-variant"
   >
     <h1
-      class="font-display text-4xl md:text-6xl text-ink leading-[1.1] tracking-tight mb-6 max-w-[20ch] mx-auto"
+      class="font-display text-[40px] md:text-[64px] leading-[1.08] tracking-tight text-ink mb-7 md:mb-8 max-w-[13ch] md:max-w-[15ch]"
     >
       Perspektiv från någon som bygger på gränsen mellan kod, produkt och
       design.
     </h1>
-    <div class="max-w-[56ch] mx-auto space-y-4">
-      <p class="text-ink-muted text-lg leading-relaxed">
+    <div class="space-y-4">
+      <p class="text-ink-muted leading-relaxed">
         Jag är tech lead, sitter i en produkttrio och jobbar med AI i
         produktion. Här skriver jag om vad jag faktiskt ser förändras —
         AI-arkitektur i praktiken, tekniskt ledarskap utan mandat, och hur
         gränsen mellan att koda, designa och äga en produkt blir tunnare för
         varje år.
       </p>
-      <p class="text-ink-muted text-lg leading-relaxed">
+      <p class="text-ink-muted leading-relaxed">
         Inget om hur saker borde fungera i teorin. Bara hur de fungerar när man
         sitter mitt i det.
       </p>
     </div>
   </section>
 
-  <section class="reading-column py-16 md:py-20">
-    <h2
-      class="font-sans text-xs font-semibold tracking-[0.2em] uppercase text-ink-muted mb-10 text-center"
-    >
-      Senaste inläggen
-    </h2>
-
+  <section class="measure pb-16 md:pb-20">
     {
       posts.length === 0 ? (
-        <p class="text-ink-muted text-center py-8">
+        <p class="text-ink-muted py-8">
           Första inläggen är på väg. Kom tillbaka snart, eller följ via{' '}
           <a
             href={`${base}/rss.xml`}
@@ -58,9 +52,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           så missar du inget.
         </p>
       ) : (
-        <div class="flex flex-col gap-14 md:gap-16">
+        <div>
           {posts.map((post, index) => (
-            <Fragment>
+            <div
+              class={
+                index > 0 ? 'pt-7 mt-7 border-t border-outline-variant' : ''
+              }
+            >
               <ArticleCard
                 title={post.data.title}
                 description={post.data.description}
@@ -68,13 +66,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                 slug={post.id.replace(/\.md$/, '')}
                 tags={post.data.tags}
                 topic={post.data.topic}
-                heroImage={post.data.heroImage}
-                heroImageAlt={post.data.heroImageAlt}
               />
-              {index < posts.length - 1 && (
-                <hr class="border-t-[0.5px] border-outline-variant w-16 mx-auto" />
-              )}
-            </Fragment>
+            </div>
           ))}
         </div>
       )
