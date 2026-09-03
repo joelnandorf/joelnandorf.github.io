@@ -44,7 +44,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link
@@ -66,12 +66,18 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <meta name="generator" content={Astro.generator} />
   </head>
   <body
-    class="flex flex-col min-h-dvh antialiased selection:bg-surface-container-high selection:text-ink transition-colors duration-300"
+    class="antialiased selection:bg-surface-container-high selection:text-ink transition-colors duration-300"
   >
-    <Header />
-    <main class="flex-1">
-      <slot />
-    </main>
-    <Footer />
+    <div
+      class="mx-auto max-w-[1180px] md:grid md:grid-cols-[160px_1fr] lg:grid-cols-[180px_1fr]"
+    >
+      <Header />
+      <main
+        class="md:col-start-2 md:row-start-1 px-5 pt-10 pb-0 md:pt-16 md:pr-10 md:pl-[60px]"
+      >
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>

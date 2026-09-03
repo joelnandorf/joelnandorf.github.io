@@ -23,30 +23,32 @@ const label = getTopicLabel(topic);
   description={`Alla inlägg om ${label} på Shift+Build.`}
 >
   <section
-    class="app-layout pt-16 pb-14 md:pt-24 md:pb-20 text-center border-b border-outline-variant/40"
+    class="measure pb-11 md:pb-12 mb-8 md:mb-9 border-b border-outline-variant"
   >
     <span
-      class="font-sans text-xs font-semibold tracking-[0.15em] uppercase text-accent mb-5 block"
+      class="block text-[11px] font-medium tracking-[0.08em] uppercase text-accent mb-4"
     >
       Ämne
     </span>
     <h1
-      class="font-display text-4xl md:text-5xl text-ink leading-tight tracking-tight"
+      class="font-display text-[40px] md:text-[52px] leading-[1.1] tracking-tight text-ink"
     >
       {label}
     </h1>
   </section>
 
-  <section class="reading-column py-16 md:py-20">
+  <section class="measure pb-16 md:pb-20">
     {
       posts.length === 0 ? (
-        <p class="text-ink-muted text-center py-8">
-          Inga inlägg om {label} än.
-        </p>
+        <p class="text-ink-muted py-8">Inga inlägg om {label} än.</p>
       ) : (
-        <div class="flex flex-col gap-14 md:gap-16">
+        <div>
           {posts.map((post, index) => (
-            <Fragment>
+            <div
+              class={
+                index > 0 ? 'pt-7 mt-7 border-t border-outline-variant' : ''
+              }
+            >
               <ArticleCard
                 title={post.data.title}
                 description={post.data.description}
@@ -54,19 +56,14 @@ const label = getTopicLabel(topic);
                 slug={post.id.replace(/\.md$/, '')}
                 tags={post.data.tags}
                 topic={post.data.topic}
-                heroImage={post.data.heroImage}
-                heroImageAlt={post.data.heroImageAlt}
               />
-              {index < posts.length - 1 && (
-                <hr class="border-t-[0.5px] border-outline-variant w-16 mx-auto" />
-              )}
-            </Fragment>
+            </div>
           ))}
         </div>
       )
     }
 
-    <div class="mt-16 text-center">
+    <div class="mt-12">
       <a
         href={`${base}/amnen`}
         class="text-sm text-ink-muted hover:text-ink transition-colors"

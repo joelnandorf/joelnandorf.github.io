@@ -17,35 +17,35 @@ const topicsWithCount = TOPICS.map((topic) => ({
   description="Alla ämnen på Shift+Build — bläddra bland inläggen efter AI-arkitektur, tech lead och rollkonvergens."
 >
   <section
-    class="app-layout pt-16 pb-14 md:pt-24 md:pb-20 text-center border-b border-outline-variant/40"
+    class="measure pb-11 md:pb-12 mb-8 md:mb-9 border-b border-outline-variant"
   >
     <h1
-      class="font-display text-4xl md:text-5xl text-ink leading-tight tracking-tight mb-6"
+      class="font-display text-[40px] md:text-[52px] leading-[1.1] tracking-tight text-ink mb-5"
     >
       Ämnen
     </h1>
-    <p class="text-ink-muted text-lg leading-relaxed max-w-[46ch] mx-auto">
+    <p class="text-ink-muted leading-relaxed">
       Bläddra bland inläggen efter ämne.
     </p>
   </section>
 
-  <section class="reading-column py-16 md:py-20">
-    <div class="flex flex-col gap-6">
-      {
-        topicsWithCount.map((topic) => (
-          <a
-            href={`${base}/amnen/${topic.slug}`}
-            class="group flex items-center justify-between gap-4 rounded border border-outline-variant/40 px-6 py-5 no-underline hover:border-accent transition-colors"
-          >
-            <span class="font-display text-xl md:text-2xl text-ink group-hover:text-accent transition-colors">
-              {topic.label}
-            </span>
-            <span class="font-sans text-xs font-semibold tracking-[0.15em] uppercase text-ink-muted shrink-0">
-              {topic.count} inlägg
-            </span>
-          </a>
-        ))
-      }
-    </div>
+  <section class="measure pb-16 md:pb-20">
+    {
+      topicsWithCount.map((topic, index) => (
+        <a
+          href={`${base}/amnen/${topic.slug}`}
+          class={`group flex items-center justify-between gap-4 no-underline py-5 ${
+            index > 0 ? 'border-t border-outline-variant' : ''
+          }`}
+        >
+          <span class="font-display text-2xl text-ink group-hover:text-accent transition-colors">
+            {topic.label}
+          </span>
+          <span class="font-mono text-[11px] text-ink-muted shrink-0">
+            {topic.count} inlägg
+          </span>
+        </a>
+      ))
+    }
   </section>
 </BaseLayout>
