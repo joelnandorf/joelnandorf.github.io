@@ -1,45 +1,7 @@
----
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
----
-
 <footer
   class="md:col-start-2 md:row-start-2 border-t border-outline-variant px-5 md:pr-10 md:pl-[60px] py-8"
 >
-  <div
-    class="measure flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[13px] text-ink-muted"
-  >
-    <p class="leading-relaxed">
-      Shift+Build — perspektiv inifrån skiftet, av Joel Nandorf. Byggd med{' '}
-      <a
-        href="https://astro.build"
-        rel="noopener noreferrer"
-        target="_blank"
-        class="hover:text-ink transition-colors">Astro</a
-      >, öppen källkod på{' '}
-      <a
-        href="https://github.com/joelnandorf/shiftandbuild"
-        rel="noopener noreferrer"
-        target="_blank"
-        class="hover:text-ink transition-colors">GitHub</a
-      >.
-    </p>
-
-    <nav class="flex gap-5 shrink-0" aria-label="Footer-navigation">
-      <a href={`${base}/rss.xml`} class="hover:text-accent transition-colors"
-        >RSS</a
-      >
-      <a
-        href="https://www.linkedin.com/in/joelnandorf"
-        rel="noopener noreferrer"
-        target="_blank"
-        class="hover:text-accent transition-colors">LinkedIn</a
-      >
-      <a
-        href="https://substack.com/@joelnandorf"
-        rel="noopener noreferrer"
-        target="_blank"
-        class="hover:text-accent transition-colors">Substack</a
-      >
-    </nav>
+  <div class="measure text-[13px] text-ink-muted">
+    <p class="leading-relaxed">Joel Nandorf</p>
   </div>
 </footer>

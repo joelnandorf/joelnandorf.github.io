@@ -1,14 +1,11 @@
-# Shift+Build
+# joelnandorf.github.io
 
-Anteckningar mitt i ett skifte — där utvecklare, designer och produktmanagers blir byggare med hjälp av AI.
-
-Bloggen finns publicerad på [nandorf.dev](https://nandorf.dev).
+Personlig sida för Joel Nandorf — namn, kort presentation och kontaktuppgifter.
 
 ## Tech stack
 
 - [Astro](https://astro.build) — statisk sajtgenerator
 - [Tailwind CSS](https://tailwindcss.com) (v4, via Vite-plugin)
-- Markdown-baserade blogginlägg med Astro Content Collections
 - Deploy till GitHub Pages via GitHub Actions
 
 ## Kom igång
@@ -38,31 +35,11 @@ Ett pre-commit-hook (Husky + lint-staged) kör Prettier automatiskt på ändrade
 
 ```
 src/
-├── components/       # Återanvändbara Astro-komponenter
-├── content/
-│   └── blog/          # Blogginlägg (ett katalog per inlägg, index.md)
-├── layouts/          # Sid- och inläggslayouter
-├── lib/              # Delad logik, t.ex. ämnen/taggar
-├── pages/            # Filbaserad routing (index, ämnessidor, RSS m.m.)
-└── styles/           # Globala stilar
+├── components/  # Header och Footer
+├── layouts/     # Sidlayout
+├── pages/       # Startsida och 404
+└── styles/      # Globala stilar
 ```
-
-## Skriva ett nytt inlägg
-
-Skapa en ny katalog under `src/content/blog/<slug>/index.md` med följande frontmatter:
-
-```yaml
----
-title: 'Titel på inlägget'
-description: 'Kort beskrivning för listor och SEO.'
-pubDate: 2026-01-01
-tags: ['tagg1', 'tagg2']
-topic: 'ai-arkitektur' # ai-arkitektur | tech-lead | rollkonvergens
-draft: false
----
-```
-
-Sätt `draft: true` för att dölja inlägget från publicering. Ämnen (`topic`) definieras i `src/lib/topics.ts`.
 
 ## Deploy
 

@@ -1,15 +1,5 @@
 ---
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-
-const navLinks = [
-  { href: base || '/', label: 'Inlägg' },
-  { href: `${base}/amnen`, label: 'Ämnen' },
-  { href: `${base}/om`, label: 'Om' },
-  { href: `${base}/rss.xml`, label: 'RSS' },
-];
-
-const homeHref = base || '/';
-const currentPath = Astro.url.pathname;
 ---
 
 <header
@@ -22,36 +12,10 @@ const currentPath = Astro.url.pathname;
     <a
       href={base || '/'}
       class="font-display text-lg md:text-[17px] text-ink tracking-tight no-underline"
-      aria-label="Shift+Build — hem"
+      aria-label="Joel Nandorf — hem"
     >
-      Shift<span class="text-accent">+</span>Build
+      Joel Nandorf
     </a>
-
-    <nav
-      class="flex items-center gap-4 md:flex-col md:items-stretch md:gap-0.5 md:mt-7 text-sm"
-      aria-label="Huvudnavigation"
-    >
-      {
-        navLinks.map((link) => {
-          const isActive =
-            currentPath === link.href ||
-            (link.href !== homeHref && currentPath.startsWith(`${link.href}/`));
-          return (
-            <a
-              href={link.href}
-              aria-current={isActive ? 'page' : undefined}
-              class={`no-underline py-1.5 md:py-1.5 transition-colors ${
-                isActive
-                  ? 'text-ink font-medium'
-                  : 'text-ink-muted hover:text-ink'
-              }`}
-            >
-              {link.label}
-            </a>
-          );
-        })
-      }
-    </nav>
   </div>
 
   <div class="flex items-center md:hidden">
